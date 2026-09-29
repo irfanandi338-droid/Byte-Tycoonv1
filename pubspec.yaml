@@ -1,0 +1,28 @@
+name: byte_tycoon
+description: BYTE TYCOON - offline idle computer tycoon game. 100% offline, no internet.
+publish_to: 'none'
+version: 1.0.0+1
+
+# NOTE: lib/theme/app_theme.dart uses CardThemeData / WidgetStateProperty /
+# WidgetState (the modern Material theming API). These require a reasonably
+# recent Flutter stable release (2025+). If `flutter analyze` or the build
+# reports CardThemeData/WidgetStateProperty as undefined, run `flutter
+# upgrade` to the latest stable channel first.
+environment:
+  sdk: '>=3.5.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  shared_preferences: ^2.2.3
+  audioplayers: ^5.2.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/sounds/
