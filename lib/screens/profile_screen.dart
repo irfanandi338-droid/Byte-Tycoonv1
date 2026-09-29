@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../config/game_config.dart';
 import '../game_state.dart';
-import '../services/audio_service.dart';
 import '../services/economy_service.dart';
 import '../theme/app_theme.dart';
 import '../widgets/resource_bar.dart';

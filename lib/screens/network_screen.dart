@@ -29,7 +29,7 @@ class NetworkScreen extends StatelessWidget {
                           style: const TextStyle(color: AppTheme.cyan, fontSize: 40, fontWeight: FontWeight.w900)),
                       const Text('NETWORK MULTIPLIER', style: TextStyle(color: AppTheme.textSecondary, fontSize: 11, letterSpacing: 2)),
                       const SizedBox(height: 8),
-                      NetworkView(height: 300),
+                      const NetworkView(height: 300),
                     ],
                   ),
                 ),

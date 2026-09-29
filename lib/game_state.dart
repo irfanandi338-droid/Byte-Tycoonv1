@@ -14,7 +14,6 @@ import 'services/save_service.dart';
 import 'services/vibration_service.dart';
 
 class Statistics {
-  Statistics();
   int computersPurchased = 0;
   int computersMerged = 0;
   int upgradesDone = 0;
@@ -59,7 +58,6 @@ class OfflineReport {
 }
 
 class SettingsState {
-  SettingsState();
   bool sound = true;
   bool music = false;
   bool vibration = true;
@@ -188,7 +186,7 @@ class GameState extends ChangeNotifier {
   void startGameLoop() {
     _ticker?.cancel();
     _lastTick = DateTime.now();
-    _ticker = Timer.periodic(Duration(milliseconds: GameConfig.tickMs), (_) => _tick());
+    _ticker = Timer.periodic(const Duration(milliseconds: GameConfig.tickMs), (_) => _tick());
   }
 
   void stopGameLoop() {

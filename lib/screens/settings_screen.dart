@@ -40,7 +40,7 @@ class SettingsScreen extends StatelessWidget {
         title: Text(label, style: const TextStyle(color: AppTheme.textPrimary)),
         value: value,
         activeTrackColor: AppTheme.cyan.withValues(alpha: 0.5),
-        activeColor: AppTheme.cyan,
+        activeThumbColor: AppTheme.cyan,
         onChanged: (v) {
           onChanged(v);
           gs.applySettings();

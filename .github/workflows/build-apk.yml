@@ -1,46 +1,43 @@
-name: Build APK
+name: Build Byte Tycoon APK
 
 on:
   push:
-    branches:
-      - main
-      - master
-  workflow_dispatch:
+    branches: [ main, master ]
+  workflow_dispatch: {}   # lets you click "Run workflow" manually on GitHub too
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup Java
-        uses: actions/setup-java@v4
+      - uses: actions/setup-java@v4
         with:
-          distribution: temurin
+          distribution: 'temurin'
           java-version: '17'
 
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
+      - uses: subosito/flutter-action@v2
         with:
-          channel: stable
+          channel: 'stable'
           cache: true
 
-      - name: Generate Android project if missing
+      # Generate android/ only if it doesn't already exist - never touches
+      # lib/, test/, pubspec.yaml or assets/.
+      - name: Generate android/ platform project (if missing)
         run: |
           if [ ! -d "android" ]; then
             flutter create . --platforms=android --org com.byte --project-name byte_tycoon
           fi
-          rm -f test/widget_test.dart
 
-      - name: Set package name and app label
+      # Force package name -> com.byte.tycoon, app label -> "Byte Tycoon",
+      # and a version, every run - so this stays correct even if someone
+      # re-runs `flutter create .` later.
+      - name: Set package name, app label, version
         run: |
           find android -name "build.gradle*" -exec sed -i 's/com\.byte\.byte_tycoon/com.byte.tycoon/g' {} +
 
           OLD_DIR="android/app/src/main/kotlin/com/byte/byte_tycoon"
           NEW_DIR="android/app/src/main/kotlin/com/byte/tycoon"
-
           if [ -d "$OLD_DIR" ]; then
             mkdir -p "$NEW_DIR"
             mv "$OLD_DIR"/*.kt "$NEW_DIR"/ 2>/dev/null || true
@@ -55,20 +52,12 @@ jobs:
             sed -i '/^description:/a version: 1.0.0+1' pubspec.yaml
           fi
 
-      - name: Flutter pub get
-        run: flutter pub get
+      - run: flutter pub get
+      - run: flutter analyze
+      - run: flutter test
+      - run: flutter build apk --release
 
-      - name: Flutter analyze
-        run: flutter analyze
-
-      - name: Flutter test
-        run: flutter test
-
-      - name: Build APK
-        run: flutter build apk --release
-
-      - name: Upload APK
-        uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v4
         with:
           name: byte-tycoon-apk
           path: build/app/outputs/flutter-apk/app-release.apk

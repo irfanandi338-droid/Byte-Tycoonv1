@@ -36,10 +36,10 @@ class ComputerPainter extends CustomPainter {
 
     // chassis
     final chassis = Paint()
-      ..shader = LinearGradient(
+      ..shader = const LinearGradient(
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
-        colors: [const Color(0xFF2A3550), const Color(0xFF141C2E)],
+        colors: [Color(0xFF2A3550), Color(0xFF141C2E)],
       ).createShader(Rect.fromLTWH(0, 0, w, h));
     canvas.drawRRect(body, chassis);
     canvas.drawRRect(body, Paint()..color = accent..style = PaintingStyle.stroke..strokeWidth = 1.6);
@@ -49,19 +49,19 @@ class ComputerPainter extends CustomPainter {
     for (var i = 0; i < 5; i++) {
       final y = h * 0.20 + i * h * 0.075;
       canvas.drawRRect(
-        RRect.fromRectAndRadius(Rect.fromLTWH(w * 0.26, y, w * 0.28, h * 0.035), Radius.circular(2)),
+        RRect.fromRectAndRadius(Rect.fromLTWH(w * 0.26, y, w * 0.28, h * 0.035), const Radius.circular(2)),
         finPaint,
       );
     }
 
     // motherboard / server detail
     canvas.drawRRect(
-      RRect.fromRectAndRadius(Rect.fromLTWH(w * 0.26, h * 0.60, w * 0.48, h * 0.20), Radius.circular(4)),
+      RRect.fromRectAndRadius(Rect.fromLTWH(w * 0.26, h * 0.60, w * 0.48, h * 0.20), const Radius.circular(4)),
       Paint()..color = accent.withValues(alpha: 0.15),
     );
     final chip = Paint()..color = accent.withValues(alpha: 0.85);
     canvas.drawRRect(
-      RRect.fromRectAndRadius(Rect.fromLTWH(w * 0.36, h * 0.64, w * 0.12, h * 0.10), Radius.circular(2)),
+      RRect.fromRectAndRadius(Rect.fromLTWH(w * 0.36, h * 0.64, w * 0.12, h * 0.10), const Radius.circular(2)),
       chip,
     );
     for (var i = 0; i < 3; i++) {
@@ -71,7 +71,7 @@ class ComputerPainter extends CustomPainter {
     // ports
     for (var i = 0; i < (isDataCenter ? 4 : 2); i++) {
       canvas.drawRRect(
-        RRect.fromRectAndRadius(Rect.fromLTWH(w * 0.60, h * (0.22 + i * 0.075), w * 0.10, h * 0.04), Radius.circular(1.5)),
+        RRect.fromRectAndRadius(Rect.fromLTWH(w * 0.60, h * (0.22 + i * 0.075), w * 0.10, h * 0.04), const Radius.circular(1.5)),
         Paint()..color = const Color(0xFF0A0E18),
       );
     }
