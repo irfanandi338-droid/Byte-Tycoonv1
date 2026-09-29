@@ -26,8 +26,9 @@ jobs:
       - name: Generate android/ platform project (if missing)
         run: |
           if [ ! -d "android" ]; then
-            flutter create . --platforms=android --org com.byte --project-name byte_tycoon
-          fi
+  flutter create . --platforms=android --org com.byte --project-name byte_tycoon
+  rm -f test/widget_test.dart
+fi
 
       # Force package name -> com.byte.tycoon, app label -> "Byte Tycoon",
       # and a version, every run - so this stays correct even if someone
