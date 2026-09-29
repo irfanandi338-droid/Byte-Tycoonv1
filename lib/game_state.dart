@@ -14,6 +14,7 @@ import 'services/save_service.dart';
 import 'services/vibration_service.dart';
 
 class Statistics {
+  Statistics();
   int computersPurchased = 0;
   int computersMerged = 0;
   int upgradesDone = 0;
@@ -58,6 +59,7 @@ class OfflineReport {
 }
 
 class SettingsState {
+  SettingsState();
   bool sound = true;
   bool music = false;
   bool vibration = true;
